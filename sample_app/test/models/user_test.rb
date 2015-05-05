@@ -3,7 +3,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   
   def setup
-    @user = User.new(name: "Example User", email: "user@example.com", password: "1", password_confirmation: "1")
+    @user = User.new(name: "Example User", email: "usEr@example.com", password: "1", password_confirmation: "1")
   end
   
   test "should be valid" do
@@ -35,7 +35,7 @@ class UserTest < ActiveSupport::TestCase
   end
   
   test "email validation should reject invalid addresses" do
-    invalid_addresses = %w[user@example,com user_at_foo.org user.name@example.
+    invalid_addresses = %w[user@example,com user@example..com user_at_foo.org user.name@example.
                           foo@bar_baz.com foo@bar+baz.com]
     invalid_addresses.each do |invalid_address|
       @user.email = invalid_address
@@ -54,5 +54,11 @@ class UserTest < ActiveSupport::TestCase
   test "password maxmum " do
     @user.password = "a"*7
     assert_not @user.valid?
+  end
+  
+  test "lower-case" do
+    @email = @user.email
+    @user.save
+    assert @email.downcase == @user.reload.email
   end
 end
