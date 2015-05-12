@@ -61,4 +61,5 @@ class UserTest < ActiveSupport::TestCase
     @user.save
     assert @email.downcase == @user.reload.email
   end
+
 end
