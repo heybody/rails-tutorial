@@ -7,3 +7,7 @@
 # two:
 #   email: "test@11.com"
 #   name: "santefee"
+michael:
+  name: whocares
+  email: eewcee@163.com
+  password_digest: <%= User.digest('1') %>
